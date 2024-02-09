@@ -26,8 +26,8 @@ const path = require('path');
 
 const app = express();
 app.set('view engine', 'ejs');
-app.use(helmet());
-app.use(hpp());
+//app.use(helmet());
+//app.use(hpp());
 const limiter = rateLimit({ windowMs: 60 * 1000, max: 100 });
 app.use(limiter);
 
