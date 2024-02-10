@@ -33,6 +33,11 @@ var routerBlog = express.Router();
 
 routerBlog.use(express.static(__dirname + '/views/blog/img'));
 
+routerBlog.get('/style.css', (req, res, next) =>
+{
+    return res.sendFile('blog/style.css');
+});
+
 routerBlog.get('/', (req, res, next) =>
 {
     return res.render('blog/pages/index.ejs', {});
