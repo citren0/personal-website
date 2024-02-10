@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <%- include ('./../partials/navbar.ejs') %>
+
+        <div class="container">
+            <h1>Graphics</h1>
+            <hr>
+
+            <br>
+            <h3>
+                Introduction
+            </h3>
+
+            <p>
+                Every day we take advantage of 3D computer graphics for gaming, CAD, and even website animations. I realized that nobody really understands how 3D graphics really works. Thanks to college linear algebra class, I have the knowledge to construct a simple 3D renderer.
+            </p>
+
+            <p>
+                The basic idea is to have a plane within an XYZ coordinate space which 3D objects are projected onto.
+            </p>
+
+            <img src="/posts/graphics/shadow.png" width="200px"/>
+
+            <p>
+                You can think of what is happening in a 3D graphics engine almost as casting hand puppets. A 3D object is converted into a 2D figure projected onto a plane.
+            </p>
+
+            <p>
+                The actual math behind it is what is called a "perspective projection," where you use algebra to create points on a plane which represent your points in 3D space.
+            </p>
+
+            <img src="/posts/graphics/projection.png" width="400px"/>
+
+            <p>
+                Here you can see, where an imaginary "viewing point" (not pictured) is used to cast lines between itself and the shapes that need to be projected. Where those lines intersect your viewing plane is where the the object will be seen on a 2D screen.
+            </p>
+
+            <p>
+                This perspective transformation can be represented as a matrix.
+            </p>
+
+            <img src="/posts/graphics/matrix.png" width="400px"/>
+
+            <p>
+                There are many types of projection matrices with different parameters such as aspect ratio, different types of clipping planes, and fov options. I chose one with a far and near clipping plane and fov because it worked and was a top result on google.
+            </p>
+
+            <img src="/posts/graphics/homog.png" width="300px"/>
+
+            <p>
+                Each vertex can be put into a giant matrix which will be operated upon by the transformation matrix. There will be an extra, 4th coordinate added to each vertex which will allow us to scale each vector back to one once it has been transformed. Above, you can see each column represents a vertex with an x, y, z, and homogeneous coordinate.
+            </p>
+
+            <br>
+            <h3>
+                Programming
+            </h3>
+
+            <p>
+                The real magic of a 3D renderer doesn't necessarily lie in the linear algebra. A modern CPU can perform the matrix-matrix multiply pretty quickly, but GPUs are much better at the task. In a subsequent post I will talk about migrating the math to the GPU using a computing library called OpenCL.
+            </p>
+
+            <p>
+                Where the real engineering came in for me was how I was going to draw connections between vertices. Having a bunch of dots on the screen with no lines is pretty boring, albiet adequate for viewing certain 3D models.
+            </p>
+
+            
+
+            <br><br>
+            <h3>Notes:</h3>
+            <ul>
+                <li>
+                    By SharkD - Own work. Download source code., CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=58480268">https://commons.wikimedia.org/w/index.php?curid=58480268</a>
+                </li>
+                <li>
+                    <a href="https://etc.usf.edu/clipart/galleries/266-hand-shadow-puppetry">https://etc.usf.edu/clipart/galleries/266-hand-shadow-puppetry</a>
+                </li>
+                <li>
+                    <a href="http://www.3dcpptutorials.sk/index.php?id=2">http://www.3dcpptutorials.sk/index.php?id=2</a>
+                </li>
+            </ul>
+        </div>
+
+        <div style="height: 10rem;"></div>
+        
+    </body>
+</html>
