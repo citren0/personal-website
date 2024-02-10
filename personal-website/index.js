@@ -70,7 +70,7 @@ app.get('/img/favicon.png', (req, res, next) =>
     return res.sendFile(__dirname + '/views/img/favicon.png');
 });
 
-app.get('/img/github-lobo.png', (req, res, next) =>
+app.get('/img/github-logo.png', (req, res, next) =>
 {
     return res.sendFile(__dirname + '/views/img/github-logo.png');
 });
