@@ -31,6 +31,8 @@ const path = require('path');
 // Router must be declared before app so it takes higher precedence.
 var routerBlog = express.Router();
 
+routerBlog.use(express.static(__dirname + '/views/blog/img'));
+
 routerBlog.get('/', (req, res, next) =>
 {
     return res.render('blog/pages/index.ejs', {});
