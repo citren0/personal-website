@@ -29,10 +29,81 @@ app.use(limiter);
 
 
 
-app.get('/logout', (req, res, next) =>
+
+
+
+
+
+
+
+
+
+
+
+
+// Resources
+
+app.use(express.static(__dirname + '/views/img'));
+
+app.get('/style.css', (req, res, next) =>
 {
-    res.render('views/pages/login.ejs');
+    res.sendFile(__dirname + '/views/style.css');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get('/', (req, res, next) =>
+{
+    res.render('pages/index.ejs');
+});
+
+app.get('/index', (req, res, next) =>
+{
+    res.render('pages/index.ejs');
+});
+
+app.get('/posts', (req, res, next) =>
+{
+    res.render('pages/posts.ejs');
+});
+
+app.get('/popcount', (req, res, next) =>
+{
+    res.render('pages/popcount.ejs');
+});
+
+app.get('/graphics', (req, res, next) =>
+{
+    res.render('pages/graphics.ejs');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

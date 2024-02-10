@@ -16,6 +16,7 @@ const fs = require('fs');
 //var certificate = fs.readFileSync('sslcert/cert.pem', 'utf8');
 
 // Express JS.
+var subdomain = require('express-subdomain');
 const express = require('express');
 var credentials = {key: privateKey, cert: certificate};
 
@@ -148,6 +149,52 @@ app.get('/resume', (req, res, next) =>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var routerBlog = express.Router();
+
+
+routerBlog.get('/', (req, res, next) =>
+{
+    return res.send("success");
+});
+
+app.use(subdomain('blog', routerBlog));
 
 
 
