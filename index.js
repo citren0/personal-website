@@ -26,8 +26,8 @@ const path = require('path');
 
 
 
-// ----------- BLOG -----------
 
+// ----------- BLOG -----------
 // Router must be declared before app so it takes higher precedence.
 var routerBlog = express.Router();
 
@@ -35,7 +35,7 @@ routerBlog.use(express.static(__dirname + '/views/blog/img'));
 
 routerBlog.get('/style.css', (req, res, next) =>
 {
-    return res.sendFile('blog/style.css');
+    return res.sendFile(__dirname + '/views/blog/style.css');
 });
 
 routerBlog.get('/', (req, res, next) =>
@@ -61,11 +61,12 @@ routerBlog.get('/popcount', (req, res, next) =>
 
 
 
-
+// Express Server Definition.
 const app = express();
 app.use(subdomain('blog', routerBlog));
 
 
+// Middleware.
 app.set('view engine', 'ejs');
 //app.use(helmet());
 //app.use(hpp());
@@ -75,26 +76,9 @@ app.use(limiter);
 
 
 
-
 // ----------- PERSONAL WEBSITE -----------
-
 // Resources
-console.log(__dirname + '/views/personal-website/img');
 app.use(express.static(__dirname + '/views/personal-website/img'));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Main Pages
 
@@ -116,27 +100,7 @@ app.get('/resume', (req, res, next) =>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// HTTP or HTTPS Servers.
 if (process.env.SERVER_TYPE == 'production')
 {
     var privateKey  = fs.readFileSync('sslcert/privkey.pem', 'utf8');
