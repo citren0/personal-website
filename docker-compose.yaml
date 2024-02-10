@@ -3,26 +3,13 @@ services:
   personal-website:
     image: node:lts
     user: 'node'
-    working_dir: /home/node/app/personal-website
+    working_dir: /home/node/app
     env_file: ./.env
     environment:
       - NODE_ENV=production
     ports:
       - '80:80'
       - '443:443'
-    volumes:
-      - ./:/home/node/app
-    command: 'npm start'
-  blog:
-    image: node:lts
-    user: 'node'
-    working_dir: /home/node/app/blog
-    env_file: ./.env
-    environment:
-      - NODE_ENV=production
-    ports:
-      - '81:81'
-      - '444:444'
     volumes:
       - ./:/home/node/app
     command: 'npm start'
