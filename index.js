@@ -48,14 +48,22 @@ routerBlog.get('/posts', (req, res, next) =>
     return res.render('blog/pages/posts.ejs', {});
 });
 
+
+// Posts
+
 routerBlog.get('/graphics', (req, res, next) =>
 {
-    return res.render('blog/pages/graphics.ejs', {});
+    return res.render('blog/pages/posts/graphics.ejs', {});
 });
 
 routerBlog.get('/popcount', (req, res, next) =>
 {
-    return res.render('blog/pages/popcount.ejs', {});
+    return res.render('blog/pages/posts/popcount.ejs', {});
+});
+
+routerBlog.get('/openclgentoo', (req, res, next) =>
+{
+    return res.render('blog/pages/posts/openclgentoo.ejs', {});
 });
 
 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <%- include ('./../../partials/navbar.ejs') %>
+
+        <div class="container">
+            <h1>Installing and Building with OpenCL on Gentoo GNU/Linux</h1>
+            <hr>
+
+            <br>
+            <h3>
+                Introduction
+            </h3>
+
+            <p>
+                I have been using Gentoo as my daily-driver distribution for a while now and, coming from arch, the documentation can be kind of lacking.
+            </p>
+
+            <p>
+                I was trying to build my graphics engine with g++ when I got this error.
+            </p>
+
+            <pre>
+                <code>
+                    g++ -Og -g -fopenmp -DUNIX -m64 main.cpp ./implementations/display.cpp ./implementations/transforms.cpp ./implementations/utils.cpp ./implementations/window.cpp ./implementations/gpu.cpp ./implementations/clbuild.cpp -I. -I/opt/cuda/targets/x86_64-linux/include/CL/ -lm -lX11 -lXext -lOpenCL
+                    In file included from ./include/transforms.hpp:16,
+                                    from main.cpp:16:
+                    ./include/../include/gpu.hpp:3:10: fatal error: CL/cl.h: No such file or directory
+                        3 | #include <CL/cl.h>
+                        |          ^~~~~~~~~
+                    compilation terminated.
+                    In file included from ./implementations/../include/transforms.hpp:16,
+                                    from ./implementations/display.cpp:8:
+                    ./implementations/../include/../include/gpu.hpp:3:10: fatal error: CL/cl.h: No such file or directory
+                        3 | #include <CL/cl.h>
+                        |          ^~~~~~~~~
+                    compilation terminated.
+                    In file included from ./implementations/../include/transforms.hpp:16,
+                                    from ./implementations/transforms.cpp:7:
+                    ./implementations/../include/../include/gpu.hpp:3:10: fatal error: CL/cl.h: No such file or directory
+                        3 | #include <CL/cl.h>
+                        |          ^~~~~~~~~
+                    compilation terminated.
+                    ./implementations/gpu.cpp:2:10: fatal error: CL/cl.h: No such file or directory
+                        2 | #include <CL/cl.h>
+                        |          ^~~~~~~~~
+                    compilation terminated.
+                    In file included from ./implementations/clbuild.cpp:4:
+                    ./implementations/../include/gpu.hpp:3:10: fatal error: CL/cl.h: No such file or directory
+                        3 | #include <CL/cl.h>
+                        |          ^~~~~~~~~
+                    compilation terminated.
+                    make: *** [makefile:12: all] Error 1
+                </code>
+            </pre>
+
+            <p>
+                On most distributions, solving this is as simple as going to the wiki and finding out you need to install the OpenCL headers.
+            </p>
+            
+            <p>
+                On arch, you can run <code> # pacman -S opencl-headers </code> and you'll get the correct header files.
+            </p>
+
+            <p>
+                On Gentoo however, I didn't yet know what package the files came from, and I'd like to demonstrate some techniques for solving issues like this.
+            </p>
+
+            <h3>
+                Searching Packages by Files
+            </h3>
+
+            <p>
+                For Gentoo, there is a website called Portage File List that can be used to search for a package by files.
+            </p>
+
+            <p>
+                In this case, this is what I wanted, since I'm missing specific header files that need to be included from an OpenCL library, not from my code.
+            </p>
+
+            PFL: <a href="https://www.portagefilelist.de/">https://www.portagefilelist.de/</a>
+
+            <p>
+                Searching for CL.h returned 20+ files belonging to 7 packages. In my case, I opted for <code>dev-util/nvidia-cuda-toolkit</code> which needed one use flag and one accepted license before it would install.
+            </p>
+
+            <h3>
+                Linking OpenCL to Your Program
+            </h3>
+
+            <p>
+                Installing <code>nvidia-cuda-toolkit</code> with the correct header files eliminated my first issue, but introduced a new one. Now the compiler could find the header files, but the linker found no libraries to link against.
+            </p>
+
+            <p>
+                As per the OpenCL Getting Started guide, you should use gcc and g++ with the <code>-lOpenCL</code> flag set, but compiling with <code>-lOpenCL</code> returned an error from ld.
+            </p>
+            <a href="https://github.com/KhronosGroup/OpenCL-Guide/blob/main/chapters/getting_started_linux.md">https://github.com/KhronosGroup/OpenCL-Guide/blob/main/chapters/getting_started_linux.md</a>
+
+            <pre>
+                <code>
+                    /usr/libexec/gcc/x86_64-pc-linux-gnu/ld: cannot find -lOpenCL: No such file or directory
+                </code>
+            </pre>
+
+            <h3>
+                Reading the F'ing Manual (RTFM)
+            </h3>
+
+            <p>
+                The very same OpenCL Getting Started guide I was using to check out the correct compiler flags also mentions installing a package on Ubuntu called <code>ocl-icd-opencl-dev</code>. This package seems innocent, but it could be the key.
+            </p>
+
+            <p>
+                Doing some searx'ing for "OpenCL ICD" shows that it is a package that "allow(s) developers to build applications against an Installable Client Driver loader (ICD loader) rather than linking their applications against a specific OpenCL implementation."
+            </p>
+            <a href="https://github.com/KhronosGroup/OpenCL-ICD-Loader">https://github.com/KhronosGroup/OpenCL-ICD-Loader</a>
+
+            <p>
+                OpenCL has many implementations for different brands of graphics cards, CPUs, FPGAs, uCs, etc. Setting <code>makefile</code> to link the program to one specific OpenCL implementation, that probably only works on my computer running Gentoo, would be stupid, so we can rely upon the "ICD Loader" to link our program in a more portable way.
+            </p>
+            <a href="https://www.iwocl.org/resources/opencl-implementations/">https://www.iwocl.org/resources/opencl-implementations/</a>
+            
+            <p>
+                Doing a quick search resulted in the Portage package <code>dev-libs/opencl-icd-loader</code> which was a quick install and pulled in one dependency.
+            </p>
+
+            <h3>
+                Results
+            </h3>
+
+            <p>
+                Now compiling and linking my program was no issue, and it was running flawlessly.
+            </p>
+
+            <p>
+                Generally, searching and reading the manuals are the only techniques you need to solve issues on Linux. I had become so accustomed to the Arch Wiki holding my hand through every issue that coming to Gentoo has been a bit of a shock for me. Just remember that all the people who write the wikis are human (soon to change with ChatGPT?) and they have to get their information manually from somewhere. Unless they work on the OpenCL project, chances are they're doing the same thing that I did, searching around and read the manual.
+            </p>
+
+
+            <br><br>
+            <h3>Notes:</h3>
+            <ul>
+                <li>
+                </li>
+            </ul>
+        </div>
+
+        <div style="height: 10rem;"></div>
+        
+    </body>
+</html>

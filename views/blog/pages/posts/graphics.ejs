@@ -6,7 +6,7 @@
     </head>
 
     <body>
-        <%- include ('./../partials/navbar.ejs') %>
+        <%- include ('./../../partials/navbar.ejs') %>
 
         <div class="container">
             <h1>Graphics</h1>
@@ -18,7 +18,7 @@
             </h3>
 
             <p>
-                Every day we take advantage of 3D computer graphics for gaming, CAD, and even website animations. I realized that nobody really understands how 3D graphics really works. Thanks to college linear algebra class, I have the knowledge to construct a simple 3D renderer.
+                Every day we take advantage of 3D computer graphics for gaming, CAD, and even website animations. I realized that most people don't understand how 3D graphics really work. Thanks to college linear algebra class, I have the knowledge to construct a simple 3D renderer.
             </p>
 
             <p>
@@ -32,7 +32,7 @@
             </p>
 
             <p>
-                The actual math behind it is what is called a "perspective projection," where you use algebra to create points on a plane which represent your points in 3D space.
+                The actual math behind it is what is called a "perspective projection," where you use algebra to cast points onto a plane which represent your points in 3D space.
             </p>
 
             <img src="/posts/graphics/projection.png" width="400px"/>
@@ -42,13 +42,13 @@
             </p>
 
             <p>
-                This perspective transformation can be represented as a matrix.
+                This perspective transformation can be represented as a matrix, using some triangles (beyond the scope of this post, this isn't a math blog) to reduce your 3D vector space to a 2D vector space.
             </p>
 
             <img src="/posts/graphics/matrix.png" width="400px"/>
 
             <p>
-                There are many types of projection matrices with different parameters such as aspect ratio, different types of clipping planes, and fov options. I chose one with a far and near clipping plane and fov because it worked and was a top result on google.
+                There are many types of projection matrices with different parameters such as aspect ratio, different types of clipping planes, and FOV options. I chose one with a far and near clipping plane and FOV because it worked and was a top result on google. Most perspective projection matrices really do the same thing in different ways.
             </p>
 
             <img src="/posts/graphics/homog.png" width="300px"/>
@@ -64,10 +64,6 @@
 
             <p>
                 The real magic of a 3D renderer doesn't necessarily lie in the linear algebra. A modern CPU can perform the matrix-matrix multiply pretty quickly, but GPUs are much better at the task. In a subsequent post I will talk about migrating the math to the GPU using a computing library called OpenCL.
-            </p>
-
-            <p>
-                Where the real engineering came in for me was how I was going to draw connections between vertices. Having a bunch of dots on the screen with no lines is pretty boring, albiet adequate for viewing certain 3D models.
             </p>
 
             
