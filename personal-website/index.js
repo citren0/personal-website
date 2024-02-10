@@ -25,7 +25,24 @@ require('dotenv').config();
 const path = require('path');
 
 
+
+var routerBlog = express.Router();
+
+
+routerBlog.get('/', (req, res, next) =>
+{
+    return res.send("success");
+});
+
+
+
+
+
+
+
 const app = express();
+app.use(subdomain('blog', routerBlog));
+
 app.set('view engine', 'ejs');
 //app.use(helmet());
 //app.use(hpp());
@@ -158,43 +175,6 @@ app.get('/resume', (req, res, next) =>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var routerBlog = express.Router();
-
-
-routerBlog.get('/', (req, res, next) =>
-{
-    return res.send("success");
-});
-
-app.use(subdomain('blog', routerBlog));
 
 
 
