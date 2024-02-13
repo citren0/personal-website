@@ -27,7 +27,9 @@
 
             <pre>
                 <code>
-                    g++ -Og -g -fopenmp -DUNIX -m64 main.cpp ./implementations/display.cpp ./implementations/transforms.cpp ./implementations/utils.cpp ./implementations/window.cpp ./implementations/gpu.cpp ./implementations/clbuild.cpp -I. -I/opt/cuda/targets/x86_64-linux/include/CL/ -lm -lX11 -lXext -lOpenCL
+                    g++ -Og -g -fopenmp -DUNIX -m64 main.cpp ./implementations/display.cpp ./implementations/transforms.cpp \
+                        ./implementations/utils.cpp ./implementations/window.cpp ./implementations/gpu.cpp \
+                        ./implementations/clbuild.cpp -I. -I/opt/cuda/targets/x86_64-linux/include/CL/ -lm -lX11 -lXext -lOpenCL
                     In file included from ./include/transforms.hpp:16,
                                     from main.cpp:16:
                     ./include/../include/gpu.hpp:3:10: fatal error: CL/cl.h: No such file or directory

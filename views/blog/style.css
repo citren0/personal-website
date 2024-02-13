@@ -2,7 +2,7 @@
 .topnav {
   background-color: #131313;
   overflow: hidden;
-  height: 3.3rem;
+  height: 5vh;
 }
 
 .container {
@@ -21,9 +21,9 @@
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 1rem 1rem;
+  padding: 1.6vh 1.6vh;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.8vh;
   height: 100%;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .logo {
-  height: calc(3.3rem - 20px);
+  height: calc(5vh - 20px);
   padding: 10px;
 }
 
@@ -48,13 +48,28 @@
   display: flex;
   justify-content: center;
   flex-flow: row wrap;
-  gap: 20px;
+  gap: 15px;
 }
 
 .flex-item {
-  flex: 0 0 300px;
   flex-grow: 0;     /* do not grow   - initial value: 0 */
   flex-shrink: 0;
+  border: 2px solid;
+  border-radius: 1px;
+  width: 30rem;
+  font-size: 2vh;
+}
+
+.flex-item div {
+  width: 100%;
+  height: fit-content;
+  background-color: rgb(10, 10, 10);
+  justify-content: center;
+}
+
+.flex-item img {
+  margin: auto;
+  display: block;
 }
 
 p {
