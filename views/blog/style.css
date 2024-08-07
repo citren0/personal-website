@@ -3,6 +3,7 @@
   background-color: #131313;
   overflow: hidden;
   height: 5vh;
+  display: flex;
 }
 
 .container {
