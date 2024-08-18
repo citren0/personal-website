@@ -12,8 +12,6 @@ var https = require('https');
 
 // Read TLS certificates.
 const fs = require('fs');
-//var privateKey  = fs.readFileSync('sslcert/server.pem', 'utf8');
-//var certificate = fs.readFileSync('sslcert/cert.pem', 'utf8');
 
 // Express JS.
 var subdomain = require('express-subdomain');
