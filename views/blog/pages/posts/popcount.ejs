@@ -40,12 +40,12 @@
             <br>
 
             <p>
-                The code in <code>main()</code> is mostly filler for the arguments and converting them into integers. Let's 
-                focus on the <code>popcount()</code> function.
+                The code in <code style="font-family: monospace, monospace;">main()</code> is mostly filler for the arguments and converting them into integers. Let's 
+                focus on the <code style="font-family: monospace, monospace;">popcount()</code> function.
             </p>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     int popcount(uint64_t x)
                     {
                         int num = 0;
@@ -67,13 +67,13 @@
             </p>
 
             <p>
-                Imagine you have a binary string <code>10100</code>. If you want to get rid of the least significant 1 in 
+                Imagine you have a binary string <code style="font-family: monospace, monospace;">10100</code>. If you want to get rid of the least significant 1 in 
                 the number, it's easy. Start by subtracting one from the original number, which will guarantee a flip of 
                 all bits at or below the least significant 1.
             </p>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     10100
                     -    1
                     -----
@@ -90,7 +90,7 @@
             </p>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     10100
                     & 10011
                     ------
@@ -122,7 +122,7 @@
             </p>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     int popcount(uint64_t x)
                     {
                         return __builtin_popcount(x);
@@ -145,7 +145,7 @@
             <a href="https://en.wikipedia.org/wiki/SSE4">https://en.wikipedia.org/wiki/SSE4</a>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     gcc -mpopcnt -msse4.2 popcount.c
                 </code>
             </pre>

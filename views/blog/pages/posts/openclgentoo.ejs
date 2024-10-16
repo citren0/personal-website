@@ -26,7 +26,7 @@
             </p>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     g++ -Og -g -fopenmp -DUNIX -m64 main.cpp ./implementations/display.cpp ./implementations/transforms.cpp \
                         ./implementations/utils.cpp ./implementations/window.cpp ./implementations/gpu.cpp \
                         ./implementations/clbuild.cpp -I. -I/opt/cuda/targets/x86_64-linux/include/CL/ -lm -lX11 -lXext -lOpenCL
@@ -96,16 +96,16 @@
             </h3>
 
             <p>
-                Installing <code>nvidia-cuda-toolkit</code> with the correct header files eliminated my first issue, but introduced a new one. Now the compiler could find the header files, but the linker found no libraries to link against.
+                Installing <code style="font-family: monospace, monospace;">nvidia-cuda-toolkit</code> with the correct header files eliminated my first issue, but introduced a new one. Now the compiler could find the header files, but the linker found no libraries to link against.
             </p>
 
             <p>
-                As per the OpenCL Getting Started guide, you should use gcc and g++ with the <code>-lOpenCL</code> flag set, but compiling with <code>-lOpenCL</code> returned an error from ld.
+                As per the OpenCL Getting Started guide, you should use gcc and g++ with the <code style="font-family: monospace, monospace;">-lOpenCL</code> flag set, but compiling with <code style="font-family: monospace, monospace;">-lOpenCL</code> returned an error from ld.
             </p>
             <a href="https://github.com/KhronosGroup/OpenCL-Guide/blob/main/chapters/getting_started_linux.md">https://github.com/KhronosGroup/OpenCL-Guide/blob/main/chapters/getting_started_linux.md</a>
 
             <pre>
-                <code>
+                <code style="font-family: monospace, monospace;">
                     /usr/libexec/gcc/x86_64-pc-linux-gnu/ld: cannot find -lOpenCL: No such file or directory
                 </code>
             </pre>
@@ -124,12 +124,12 @@
             <a href="https://github.com/KhronosGroup/OpenCL-ICD-Loader">https://github.com/KhronosGroup/OpenCL-ICD-Loader</a>
 
             <p>
-                OpenCL has many implementations for different brands of graphics cards, CPUs, FPGAs, uCs, etc. Setting <code>makefile</code> to link the program to one specific OpenCL implementation, that probably only works on my computer running Gentoo, would be stupid, so we can rely upon the "ICD Loader" to link our program in a more portable way.
+                OpenCL has many implementations for different brands of graphics cards, CPUs, FPGAs, uCs, etc. Setting <code style="font-family: monospace, monospace;">makefile</code> to link the program to one specific OpenCL implementation, that probably only works on my computer running Gentoo, would be stupid, so we can rely upon the "ICD Loader" to link our program in a more portable way.
             </p>
             <a href="https://www.iwocl.org/resources/opencl-implementations/">https://www.iwocl.org/resources/opencl-implementations/</a>
             
             <p>
-                Doing a quick search resulted in the Portage package <code>dev-libs/opencl-icd-loader</code> which was a quick install and pulled in one dependency.
+                Doing a quick search resulted in the Portage package <code style="font-family: monospace, monospace;">dev-libs/opencl-icd-loader</code> which was a quick install and pulled in one dependency.
             </p>
 
             <h3>
