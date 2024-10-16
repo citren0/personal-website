@@ -28,14 +28,6 @@
   margin: auto;
 }
 
-@media all and (max-width: 900px)
-{
-  .container
-  {
-    width: 100%;
-  }
-}
-
 /* Style the links inside the navigation bar */
 .topnav-a
 {
