@@ -1,3 +1,17 @@
+@font-face
+{
+    font-family: 'Overpass';
+    src: url('https://dm8ycatpatapg.cloudfront.net/Overpass-VariableFont_wght.ttf');
+}
+
+*
+{
+    font-family: "Overpass", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* Add a black background color to the top navigation */
 .topnav
 {
@@ -65,16 +79,17 @@
   flex-grow: 0;
   flex-shrink: 0;
   border: 2px solid;
-  border-radius: 1px;
+  border-radius: 5px;
   width: 30rem;
   font-size: 2vh;
 }
 
 .flex-item div
 {
-  width: 100%;
+  width: calc(100% - 2rem);
   height: fit-content;
   justify-content: center;
+  padding: 1rem;
 }
 
 .background-black
