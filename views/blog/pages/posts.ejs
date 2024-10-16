@@ -5,12 +5,12 @@
         <link rel="stylesheet" href="/style.css">
     </head>
 
-    <body>
+    <body style="display: flex; flex-flow: column;">
         <%- include ('./../partials/navbar.ejs') %>
 
 
-        <h1>Posts</h1>
-        <hr>
+        <h1 style="align-self: center;">Posts</h1>
+        <hr style="width: 100%;">
 
         <div class="flex-container">
 
@@ -35,18 +35,6 @@
                 <div style="display: flex; flex-flow: column; align-items: center; justify-content: center;">
                     <a href="/graphics"><span class="post-title-link">Graphics Engine</span></a>
                     <p>A from-scratch primitive graphics engine in C++.</p>
-                </div>
-            </div>
-
-            <div class="flex-item">
-                <div class="background-black">
-                    <a href="/openclgentoo">
-                        <img src="/thumbnails/openclgentoo.png" width="300px" height="320px" />
-                    </a>
-                </div>
-                <div style="display: flex; flex-flow: column; align-items: center; justify-content: center;">
-                    <a href="/openclgentoo"><span class="post-title-link">OpenCL Development on Gentoo</span></a>
-                    <p>A guide to get compiling and linking with OpenCL on the Gentoo distribution.</p>
                 </div>
             </div>
 
