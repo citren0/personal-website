@@ -19,49 +19,6 @@ const path = require('path');
 
 
 
-
-// ----------- BLOG -----------
-// Router must be declared before app so it takes higher precedence.
-var routerBlog = express.Router();
-
-routerBlog.use(express.static(__dirname + '/views/blog/img'));
-
-routerBlog.get('/style.css', (req, res, next) =>
-{
-    return res.sendFile(__dirname + '/views/blog/style.css');
-});
-
-routerBlog.get('/', (req, res, next) =>
-{
-    return res.render('blog/pages/index.ejs', {});
-});
-
-routerBlog.get('/posts', (req, res, next) =>
-{
-    return res.render('blog/pages/posts.ejs', {});
-});
-
-
-// Posts
-
-routerBlog.get('/graphics', (req, res, next) =>
-{
-    return res.render('blog/pages/posts/graphics.ejs', {});
-});
-
-routerBlog.get('/popcount', (req, res, next) =>
-{
-    return res.render('blog/pages/posts/popcount.ejs', {});
-});
-
-routerBlog.get('/openclgentoo', (req, res, next) =>
-{
-    return res.render('blog/pages/posts/openclgentoo.ejs', {});
-});
-
-
-
-
 // Express Server Definition.
 const app = express();
 app.use(subdomain('blog', routerBlog));
