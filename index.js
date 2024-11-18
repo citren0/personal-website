@@ -17,12 +17,8 @@ const express = require('express');
 require('dotenv').config();
 const path = require('path');
 
-
-
 // Express Server Definition.
 const app = express();
-app.use(subdomain('blog', routerBlog));
-
 
 // Middleware.
 app.set('view engine', 'ejs');
